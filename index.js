@@ -71,7 +71,7 @@ const createTodo = (event) => {
     // Store back in the localstorage
     storeTodo(todoDatabase);
     // Update the UI
-    displayNewTodo("#todos", generateTodoTemplate)
+    displayNewTodos("#todos", generateTodoTemplate)
     // Reset form value
     todoInput.value = ""
 }
