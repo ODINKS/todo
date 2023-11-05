@@ -7,6 +7,16 @@ function uuid() {
     });
 }
 
+// Throw empty field error
+const throwEmptyFieldError = (idValue) =>{
+    const errorText = document.getElementById(idValue)
+    console.log("here", errorText);
+    errorText.classList.remove("hidden")
+    setTimeout(() => {
+        errorText.classList.add("hidden")
+    }, 3000)
+}
+
 // Retrieve todos from database
 const readTodo = (todoKey) => {
     if(!todoKey){
@@ -17,6 +27,17 @@ const readTodo = (todoKey) => {
 }
 
 //Store todos in the database
-const storeTodo = (todoDatabase) => {
+const storeTodo = (todoKey, todoDatabase) => {
     localStorage.setItem(todoKey, JSON.stringify(todoDatabase))
+}
+
+// we want to create a funxtion that will
+// 1. handle preview todo(id)       //capture the id of the todo to be used in thr next page
+// 2. get current preview todo id
+// render current preview todo
+
+
+const handlePreviewTodo = (todoId) =>{
+    storeTodo("currentTodoId", todoId)
+    location.href = "./preview-todo.html"
 }

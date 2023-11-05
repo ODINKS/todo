@@ -7,26 +7,32 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.all.min.js"></script>
+    <style>
+        .align-self-start{
+            align-self: flex-start;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-[#87CBB9]">
     <!-- Overall section -->
-    <div class="mx-auto max-w-[65%]">
+    <div class="mx-auto max-w-[65%] bg-[white] rounded-lg">
         <!-- Header -->
-        <header>
-            <h1 class="text-center text-[2rem] font-bold my-3 mb-5 border-b border-gray-400">TODOLIST</h1>
+        <header class="bg-[#F99417] rounded-lg">
+            <h1 class="text-center text-[2rem] font-bold my-3 mb-5 rounded-lg italic">TODOLIST</h1>
         </header>
+        
         <!-- main -->
-        <main class="main">
+        <main class="main shadow-xl border border-solid border-t-0 min-h-[95vh] px-5">
             <!-- Form section -->
             <form onsubmit="createTodo(event)" class="flex flex-row justify-between mb-2 pb-3 border-b border-gray-400">
                 <div class="w-[50%]">
-                    <input type="text" placeholder="Type in your todo here" id="todo-input" class="w-full px-3 py-1 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none" maxlength="40">
+                    <input type="text" placeholder="Type in your todo here" id="todo-input" class="w-full px-3 py-1 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
                     <span id="error-text" class="text-red-500 block hidden">You must enter a todo!</span>
                 </div>
                 <!-- Add todo btn -->
-                <button id="add-todo-btn" class="bg-green-700 text-[white] px-3 rounded-lg">Add todo</button>
+                <button id="add-todo-btn" class="align-self-start bg-green-700 text-[white] px-3 py-2 rounded-lg ">Add todo</button>
                 <!-- update todo btn -->
-                <button type="button" id="update-todo-btn" onclick="updateTodo()" class="bg-red-700 text-[white] px-3 rounded-lg hidden">Update todo</button>
+                <button type="button" id="update-todo-btn" onclick="updateTodo()" class="align-self-start bg-[#4D4C7D] text-[white] px-3 py-2 rounded-lg hidden">Update todo</button>
             </form>
             
             <!-- Todo area -->

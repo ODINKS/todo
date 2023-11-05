@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <style>
+        .align-self-start {
+            align-self: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Overall section -->
+    <div class="mx-auto max-w-[65%] bg-[white] rounded-lg">
+        <!-- Header -->
+        <header class="bg-[#F99417] rounded-lg">
+            <h1 class="text-center text-[2rem] font-bold my-3 mb-5 border-b border-gray-400 rounded-lg italic">TODOLIST
+            </h1>
+        </header>
+        <!-- main -->
+        <main class="main shadow-xl border border-solid min-h-[95vh] px-5">
+            <!-- Todo area -->
+            <div id="preview-todo-container" class="h-[70vh]">
+
+            </div>
+        </main>
+        
+    </div>
+    <script src="./utils.js"></script>
+    <script src="./preview-todo.js"></script>
+</body>
+
+</html>
