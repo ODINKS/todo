@@ -10,7 +10,6 @@ function uuid() {
 // Throw empty field error
 const throwEmptyFieldError = (idValue) =>{
     const errorText = document.getElementById(idValue)
-    console.log("here", errorText);
     errorText.classList.remove("hidden")
     setTimeout(() => {
         errorText.classList.add("hidden")

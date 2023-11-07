@@ -13,12 +13,14 @@ const renderCurrentPreviewTodo = () => {
     <section class="">
                     <div class="mb-3 flex flex-row justify-between px-2 py-2 rounded-lg border-b-[2px]">
                         <!-- Todo input value -->
-                        <button class="text-lg font-medium truncate max-w-sm" id="todo-preview-name">${todoName}</button>
-
+                        <a class="text-lg font-medium truncate max-w-sm">${todoName}</a>
                         <!-- edit icon -->
                         <div class="flex justify-between">
+                        <button id="update-todo-desc" class="align-self-start bg-green-700 text-[white] px-3 py-1 rounded-lg mr-10 align-self-start hidden" onclick="updateTodoDescription()">
+                        Update desc
+                        </button>
                             <button class="mr-[1rem] border border-gray-400 p-1 rounded-full align-self-start"
-                                onclick="updatePreviewTodo('${id}')">
+                                onclick="handleEditTodoPreviewMode('${id}')">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-700">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -36,8 +38,12 @@ const renderCurrentPreviewTodo = () => {
                         </div>
                     </div>
                 </section>
-                <section class="flex gap-20 w-full border border-gray-300 py-2 px-3 rounded-lg text-sm" id="todo-description">
-                    <p class="" id="todo-preview-desc">${description || ""}</p>
+                <section class="flex gap-20 w-full border border-gray-300 py-2 px-3 rounded-lg text-sm" id = "todo-description">
+                <div class="hidden" id="todo-desc-input-container">
+                    <textarea name="" id="todo-desc-input" cols="30" rows="3" class="rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none px-3 py-2">${description || ""}</textarea>
+                    <span id="error-text" class="text-red-500 block hidden">You must enter a todo description!</span>
+                </div>
+                    <p class="">${description || ""}</p>
                 </section>
                 <!-- Date -->
                 <section class="mt-3">
@@ -63,46 +69,43 @@ const renderCurrentPreviewTodo = () => {
 renderCurrentPreviewTodo()
 
 
-const updatePreviewTodo = (todoId) => {
-    const todoPreviewName = document.getElementById("todo-preview-name").textContent
-    const todoPreviewDesc = document.getElementById("todo-preview-desc").textContent
-    Swal.fire({
-        title: "Edit Preview Todo",
-        html: `
-        <div class="flex flex-col gap-6">
-        <input type="text" value="${todoPreviewName}" class="p-2 rounded-lg border border-slate-500 focus:border-yellow-500 focus:outline-none" id="todo-input"/>
+const handleEditTodoPreviewMode = (todoId) => {
+    const todoDatabase = readTodo(todoKey);
+    // Find the exact todo to edit
+    const todoToUpdate = todoDatabase?.find((todo) => todo.id === todoId)
+    if (!todoToUpdate) {
+        return
+    }
+    const todoDescInputContainer = document.getElementById("todo-desc-input-container");
+    todoDescInputContainer.classList.remove("hidden")
+    const todoDescriptionInput = document.getElementById("todo-desc-input");
+    todoDescriptionInput.focus()
+    const todoDescUpdateBtn = document.getElementById("update-todo-desc")
+    todoDescUpdateBtn.classList.remove("hidden")
+    todoDescUpdateBtn.setAttribute("todo-desc-id-to-update", todoId)
 
-        <textarea name="" id="todo-description-input" cols="20" rows="5" class="border border-slate-500 focus:border-yellow-500 focus:outline-none p-2 rounded-lg">${todoPreviewDesc}</textarea>
-        </div>
-        `,
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText: 'Update',
-        preConfirm: () => {
-            return {
-                'todo-input': document.getElementById("todo-input").value,
-                'todo-description-input': document.getElementById("todo-description-input").value
-            }
+}
 
-        }
-
-    }).then(res => {
-        // To access the input values use: res.value.inputFieldName
-        const todoDescriptionInput = res.value['todo-description-input'];
-        const todoInput = res.value['todo-input'];
-
-        // Fetch the database
-        const todoDatabase = readTodo(todoKey);
-        const todoIndex = todoDatabase.findIndex((todo) => todo.id === todoId);
-        if (todoIndex !== -1) {
-            // Update the todo with the edited task
-            todoDatabase[todoIndex].description = todoDescriptionInput;
-            todoDatabase[todoIndex].todoName = todoInput;
-            // Store in local storage
-            storeTodo(todoKey, todoDatabase);
-            renderCurrentPreviewTodo()
-        }
-    })
+const updateTodoDescription = () => {
+    const todoDescriptionInput = document.getElementById("todo-desc-input");
+    if (!todoDescriptionInput.value) {
+        throwEmptyFieldError("error-text")
+        return
+    }
+    const todoDescUpdateBtn = document.getElementById("update-todo-desc")
+    const todoId = todoDescUpdateBtn.getAttribute("todo-desc-id-to-update")
+    // Fetch the database
+    const todoDatabase = readTodo(todoKey);
+    const todoIndex = todoDatabase.findIndex((todo) => todo.id === todoId);
+    if(todoIndex !== -1){
+        // Update the todo with the edited task
+        todoDatabase[todoIndex].description = todoDescriptionInput.value;
+        // Store in local storage
+        storeTodo(todoKey, todoDatabase);
+        todoDescUpdateBtn.classList.add("hidden")
+        todoDescriptionInput.classList.add("hidden")
+        renderCurrentPreviewTodo()
+    }
 }
 
 // Delete a todo
@@ -120,7 +123,7 @@ const deleteTodo = (todoId) => {
             // Delete the actual todo
             const newTodoDatabase = todoDatabase.filter((todo) => todo.id !== todoId)
             // Store in local storage
-            storeTodo(todoKey, newTodoDatabase)
+            storeTodo(todoKey,newTodoDatabase)
             // Render updated todo
             location.href = "./index.html"
         }
