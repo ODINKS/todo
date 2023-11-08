@@ -37,11 +37,11 @@ const renderCurrentPreviewTodo = () => {
                     </div>
                 </section>
                 <section class="flex gap-20 w-full border border-gray-300 py-2 px-3 rounded-lg text-sm" id="todo-description">
-                    <p class="" id="todo-preview-desc">${description || ""}</p>
+                    <p class="" id="todo-preview-desc">${description || `<span class="text-center text-gray-400 italic text-lg">Write your description here</span>`}</p>
                 </section>
                 <!-- Date -->
                 <section class="mt-3">
-                    <span class="mr-2">${todoDate}</span>
+                    <span class="mr-2 text-xs">${todoDate}</span>
                     <span class="mr-2">&middot;</span>
                     <span class="bg-red-600 rounded-full px-2 py-0.5">pending</span>
                 </section>
@@ -79,11 +79,19 @@ const updatePreviewTodo = (todoId) => {
         focusConfirm: false,
         confirmButtonText: 'Update',
         preConfirm: () => {
-            return {
-                'todo-input': document.getElementById("todo-input").value,
-                'todo-description-input': document.getElementById("todo-description-input").value
-            }
+            const todoInput = document.getElementById("todo-input")
+            const todoDescriptionInput = document.getElementById("todo-description-input")
 
+            // Check if the fields are empty
+            if (!todoInput.value.trim() || !todoDescriptionInput.value.trim()) {
+                // Get the values from the input fields
+                Swal.showValidationMessage("Fields cannot be empty");
+                return false; // Prevent the modal from closing
+            }
+            return {
+                'todo-input': todoInput.value,
+                'todo-description-input': todoDescriptionInput.value
+            }
         }
 
     }).then(res => {
