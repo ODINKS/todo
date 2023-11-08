@@ -37,7 +37,7 @@ const renderCurrentPreviewTodo = () => {
                     </div>
                 </section>
                 <section class="flex gap-20 w-full border border-gray-300 py-2 px-3 rounded-lg text-sm" id="todo-description">
-                    <p class="" id="todo-preview-desc">${description || `<span class="text-center text-gray-400 italic text-lg">Write your description here</span>`}</p>
+                    <p class="" id="todo-preview-desc">${description || `<span class="text-center text-gray-400 italic text-lg">Your description will appear here</span>`}</p>
                 </section>
                 <!-- Date -->
                 <section class="mt-3">
