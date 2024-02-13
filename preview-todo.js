@@ -6,8 +6,9 @@ const renderCurrentPreviewTodo = () => {
     const todoDatabase = readTodo(todoKey);
     // Get the current todo using the current todoId
     const currentTodo = todoDatabase.find(todo => todo.id === currentTodoId)
-    const { id, todoName, createdAt, description } = currentTodo
-    const todoDate = new Date(createdAt).toDateString();
+    const { id, todoName, createdAt, todoDate, description } = currentTodo
+    const todoDateDesc = new Date(todoDate).toDateString();
+    const todoCreatedAt = new Date(createdAt).toDateString();
     const previewTodoContainer = document.getElementById("preview-todo-container")
     previewTodoContainer.innerHTML = `
     <section class="">
@@ -40,22 +41,31 @@ const renderCurrentPreviewTodo = () => {
                     <p class="" id="todo-preview-desc">${description || `<span class="text-center text-gray-400 italic text-lg">Your description will appear here</span>`}</p>
                 </section>
                 <!-- Date -->
-                <section class="mt-3">
-                    <span class="mr-2 text-xs">${todoDate}</span>
-                    <span class="mr-2">&middot;</span>
-                    <span class="bg-red-600 rounded-full px-2 py-0.5">pending</span>
+                <section class="mt-6 flex gap-x-3">
+                    <span class="mr-2 text-xs flex flex-col gap-y-2">
+                        <span class="flex gap-x-3 italic">
+                            <span class="font-semibold">Todo Due Date:</span>
+                            <span class="">${todoDateDesc}</span> 
+                        </span>
+                        <span class="flex gap-x-3 italic">
+                            <span class="font-semibold">Created At:</span>
+                            <span class="">${todoCreatedAt}</span> 
+                        </span>
+                    </span>
+                    <span class="mr-2 font-bold text-lg self-center">&middot;</span>
+                    <span class="self-center">${new Date(todoDate).getTime() < Date.now()? `<span class="rounded-full px-2 py-1 bg-red-600">Due</span>`: `<span class="rounded-full px-2 py-1 bg-green-600">pending</span>`}</span>
                 </section>
-                <section class="flex flex-row items-center justify-center mt-4">
-                <a href="./index.html" class="flex flex-row justify-center">
-                    <button class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-4 h-4 text-slate-600 hover:text-slate-800">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                        </svg>
-                    </button>
-                    <span class="text-sm ml-2">View all todos</span>
-                </a>
+                <section class="flex flex-row items-center justify-center mt-12">
+                    <a href="./index.html" class="flex flex-row justify-center">
+                        <button class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-4 h-4 text-slate-600 hover:text-slate-800">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                            </svg>
+                        </button>
+                        <span class="text-sm ml-2">View all todos</span>
+                    </a>
                 </section>
     `
 }

@@ -1,47 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo list</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
-    <style>
-        .align-self-start{
-            align-self: flex-start;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo list</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="sweetalert2.all.min.js"></script>
+  <style>
+    .align-self-start {
+      align-self: flex-start;
+    }
+  </style>
 </head>
+
 <body class="bg-[#87CBB9]">
-    <!-- Overall section -->
-    <div class="mx-auto max-w-[65%] bg-[white] rounded-lg">
-        <!-- Header -->
-        <header class="bg-[#F99417] rounded-lg">
-            <h1 class="text-center text-[2rem] font-bold my-3 mb-5 rounded-lg italic">TODOLIST</h1>
-        </header>
-        
-        <!-- main -->
-        <main class="main shadow-xl border border-solid border-t-0 min-h-[95vh] px-5">
-            <!-- Form section -->
-            <form onsubmit="createTodo(event)" class="flex flex-row justify-between mb-2 pb-3 border-b border-gray-400">
-                <div class="w-[50%]">
-                    <input type="text" placeholder="Type in your todo here" id="todo-input" class="w-full px-3 py-1 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
-                    <span id="error-text" class="text-red-500 block hidden">You must enter a todo!</span>
-                </div>
-                <!-- Add todo btn -->
-                <button id="add-todo-btn" class="align-self-start bg-green-700 text-[white] px-3 py-2 rounded-lg ">Add todo</button>
-                <!-- update todo btn -->
-                <button type="button" id="update-todo-btn" onclick="updateTodo()" class="align-self-start bg-[#4D4C7D] text-[white] px-3 py-2 rounded-lg hidden">Update todo</button>
-            </form>
-            
-            <!-- Todo area -->
-            <div id="todos" class="h-[70vh]">
-               
-            </div>
-        </main>
-    </div>
-    <script src="./utils.js"></script>
-    <script src="./index.js"></script>
+  <!-- Overall section -->
+  <div class="mx-auto max-w-[65%] bg-[white] rounded-lg">
+    <!-- Header -->
+    <header class="bg-[#F99417] rounded-lg">
+      <h1 class="text-center text-[2rem] font-bold my-3 mb-5 rounded-lg italic">TODOLIST</h1>
+    </header>
+
+    <!-- main -->
+    <main class="main shadow-xl border border-solid border-t-0 min-h-[95vh] px-10 lg:px-5 ">
+      <!-- Form section -->
+      <form onsubmit="createTodo(event)" class="flex flex-col gap-4 lg:gap-0 lg:flex-row lg:justify-between mb-2 pb-3 border-b border-gray-400">
+        <div class="w-full lg:w-[50%] flex flex-col gap-y-5">
+          <!-- Todo Input -->
+          <div>
+            <input type="text" placeholder="Type in your todo here" id="todo-input"
+              class="w-full px-3 py-1 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none">
+            <span id="todo-error-text" class="text-red-500 block hidden">You must enter a todo!</span>
+          </div>
+
+          <!-- Date time input -->
+          <div class="">
+            <input type="datetime-local" name="todo-date" id="todo-date"
+              class="border border-gray-600 rounded-lg px-3 py-1 focus:border-blue-500 focus:outline-none w-full" />
+            <span id="todo-empty-date-error" class="text-red-500 block hidden">You must enter a todo date!</span>
+            <span id="todo-invalid-date-error" class="text-red-500 block hidden">Todo date cannot be in the past!</span>
+          </div>
+        </div>
+        <!-- Add todo btn -->
+        <button id="add-todo-btn" class="self-center bg-green-700 text-[white] px-3 py-2 rounded-lg ">Add
+          todo</button>
+        <!-- update todo btn -->
+        <button type="button" id="update-todo-btn" onclick="updateTodo()"
+          class="self-center bg-[#4D4C7D] text-[white] px-3 py-2 rounded-lg hidden">Update todo</button>
+      </form>
+
+      <!-- Todo area -->
+      <div id="todos" class="h-[70vh]">
+
+      </div>
+    </main>
+  </div>
+  <script src="./utils.js"></script>
+  <script src="./index.js"></script>
 </body>
+
 </html>
