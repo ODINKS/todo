@@ -8,16 +8,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="sweetalert2.all.min.js"></script>
-  <style>
-    .align-self-start {
-      align-self: flex-start;
-    }
-  </style>
 </head>
 
 <body class="bg-[#87CBB9]">
   <!-- Overall section -->
-  <div class="mx-auto max-w-[65%] bg-[white] rounded-lg">
+  <div class="mx-auto w-[90%] md:max-w-[65%] bg-[white] rounded-lg">
     <!-- Header -->
     <header class="bg-[#F99417] rounded-lg">
       <h1 class="text-center text-[2rem] font-bold my-3 mb-5 rounded-lg italic">TODOLIST</h1>
@@ -44,11 +39,11 @@
           </div>
         </div>
         <!-- Add todo btn -->
-        <button id="add-todo-btn" class="self-center bg-green-700 text-[white] px-3 py-2 rounded-lg ">Add
+        <button id="add-todo-btn" class="text-sm md:text-lg self-center bg-green-700 text-[white] px-3 py-2 rounded-lg ">Add
           todo</button>
         <!-- update todo btn -->
         <button type="button" id="update-todo-btn" onclick="updateTodo()"
-          class="self-center bg-[#4D4C7D] text-[white] px-3 py-2 rounded-lg hidden">Update todo</button>
+          class="text-sm md:text-lg self-center bg-[#4D4C7D] text-[white] px-3 py-2 rounded-lg hidden">Update todo</button>
       </form>
 
       <!-- Todo area -->
