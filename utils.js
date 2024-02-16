@@ -7,6 +7,7 @@ function uuid() {
     });
 }
 
+
 // Throw empty field error
 const throwEmptyFieldError = (idValue) =>{
     const errorText = document.getElementById(idValue)

@@ -4,7 +4,7 @@ const todoDate = document.getElementById("todo-date")
 
 // Generate a template for each todo
 const generateTodoTemplate = (inputValue, todoDateDetails, id) => {
-    const todoDate = new Date(todoDateDetails).toDateString();
+    const todoDate = new Date(todoDateDetails).toLocaleDateString();
     const todoTime = new Date(todoDateDetails).toLocaleTimeString("en-US", { hour12: true, hour: '2-digit', minute: '2-digit' })
     return (`<section class="group">
     <div class="group mb-3 flex flex-col gap-y-3 items-center md:items-start md:flex-row  md:justify-between px-5 md:px-2 py-2 group-hover:bg-gray-200 rounded-lg border-b-[2px]">

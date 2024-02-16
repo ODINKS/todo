@@ -41,7 +41,7 @@ const renderCurrentPreviewTodo = () => {
                     <p class="" id="todo-preview-desc">${description || `<span class="text-center text-gray-400 italic text-lg">Your description will appear here</span>`}</p>
                 </section>
                 <!-- Date -->
-                <section class="mt-6 flex flex-col item-center justify md:item-start border border-black md:flex-row gap-x-3">
+                <section class="mt-6 flex flex-col item-center justify md:item-start md:flex-row gap-x-3">
                     <span class="mr-2 text-xs flex flex-col gap-y-2">
                         <span class="flex justify-center md:justify-start gap-x-3 italic">
                             <span class="font-semibold">Todo Due Date:</span>
